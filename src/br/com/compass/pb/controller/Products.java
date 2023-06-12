@@ -1,3 +1,5 @@
+package br.com.compass.pb.controller;
+
 public class Products {
 
     public Products(String id, String name, Double price, Integer quantity) {

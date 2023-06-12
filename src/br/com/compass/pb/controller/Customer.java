@@ -1,3 +1,5 @@
+package br.com.compass.pb.controller;
+
 public class Customer {
 
     private String id;

@@ -1,3 +1,5 @@
+package br.com.compass.pb.controller;
+
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -21,7 +23,7 @@ public class ShoppingCart {
     }
 
     public void showProducts(){
-        System.out.println("Products in cart: " + this.products.size());
+        System.out.println("br.com.compass.pb.controller.Products in cart: " + this.products.size());
     }
 
 }
