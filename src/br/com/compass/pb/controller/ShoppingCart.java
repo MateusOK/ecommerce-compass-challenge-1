@@ -1,18 +1,21 @@
 package br.com.compass.pb.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 public class ShoppingCart {
 
-    private Collection<Products> products = new HashSet<>();
+    private List<Products> products = new ArrayList<>();
 
     public String addProduct(Products product){
         if(product.getQuantity() > 0){
             this.products.add(product);
-            return "Product added to cart";
+            System.out.println("Product added to cart");
         }
-        else{return "Product not available, out of stock";}
+        else{System.out.println("Product not available, out of stock");}
+        return null;
     }
 
     public String removeProduct(Products product){
@@ -23,7 +26,11 @@ public class ShoppingCart {
     }
 
     public void showProducts(){
-        System.out.println("br.com.compass.pb.controller.Products in cart: " + this.products.size());
+        System.out.println("Total of products in cart: " + this.products.size());
+        System.out.print("Products: ");
+        for (Products p : products) {
+            System.out.print(p.getName() + ", ");
+        }
     }
 
 }
