@@ -2,8 +2,7 @@ package br.com.compass.pb.controller;
 import br.com.compass.pb.model.Connector;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Products {
 
@@ -12,7 +11,8 @@ public class Products {
     private double price;
     private Integer quantity;
 
-    public Products(String name, Double price, Integer quantity) {
+    public Products(Integer id, String name, Double price, Integer quantity) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -52,8 +52,8 @@ public class Products {
         this.quantity = quantity;
     }
 
-    public static Set<Products> getAllProducts() {
-        Set<Products> products = new HashSet<>();
+    public static List<Products> getAllProducts() {
+        List<Products> products = new ArrayList<>();
         Connection connection = Connector.getConnection();
 
         try {
@@ -66,7 +66,7 @@ public class Products {
                 Double price = resultSet.getDouble("price");
                 Integer quantity = resultSet.getInt("quantity");
 
-                Products product = new Products(name, price, quantity);
+                Products product = new Products(id, name, price, quantity);
                 product.setId(id); // Set the ID obtained from the database
                 products.add(product);
             }
@@ -79,6 +79,20 @@ public class Products {
 
         return products;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Products product = (Products) o;
+        return Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 }
 
 
