@@ -9,20 +9,20 @@ public class ShoppingCart {
 
     private List<Products> products = new ArrayList<>();
 
-    public String addProduct(Products product){
+    public void addProduct(Products product){
         if(product.getQuantity() > 0){
             this.products.add(product);
             System.out.println("Product added to cart");
         }
         else{System.out.println("Product not available, out of stock");}
-        return null;
     }
 
-    public String removeProduct(Products product){
-        if(this.products.remove(product)){
-            return "Product removed from cart";
+    public void removeProduct(Products product){
+        if(this.products.contains(product)){
+            this.products.remove(product);
+            System.out.println("Product removed from cart");
         }
-        else{return "There was a problem adding this product to cart";}
+        else{System.out.println("There was a problem removing this product from cart");}
     }
 
     public void showProducts(){
