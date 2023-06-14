@@ -12,7 +12,7 @@ public class Connector {
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce", "root", "1234");
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println("An error occurred while trying to the database");
             }
         }
         return connection;
