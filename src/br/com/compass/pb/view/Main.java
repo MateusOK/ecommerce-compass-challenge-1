@@ -5,11 +5,10 @@ import br.com.compass.pb.controller.ShoppingCart;
 import br.com.compass.pb.controller.Stock;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
 
     public static ShoppingCart cart;
@@ -33,16 +32,21 @@ public class Main {
                     addToCart(scanner);
                     break;
                 case 3:
-                    cart.showProducts();
+                    removeFromCart(scanner);
                     break;
                 case 4:
+                    cart.showProducts();
+                    break;
+                case 5:
+                    break;
+                case 6:
                     System.out.println("Exiting the program...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
-        } while (choice != 4);
+        } while (choice != 6);
 
         scanner.close();
     }
@@ -51,16 +55,19 @@ public class Main {
         System.out.println("Menu:");
         System.out.println("1. Display all products");
         System.out.println("2. Add a product to the cart");
-        System.out.println("3. See your cart");
-        System.out.println("4. Exit");
+        System.out.println("3. Remove a product from the cart");
+        System.out.println("4. See your cart");
+        System.out.println("5. Checkout");
+        System.out.println("6. Exit");
         System.out.print("Enter your choice: ");
     }
 
     private static void displayAllProducts() {
-        Set<Products> products = Products.getAllProducts();
+        List<Products> products = Products.getAllProducts();
         System.out.println("Available products:");
         for (Products product : products) {
-            System.out.println(product.getId() + " - " + product.getName() + " - $" + product.getPrice());
+            System.out.println("ID: "+ product.getId() + " - Name: " + product.getName()
+                    + " - $" + product.getPrice() + " - Stock: " + product.getQuantity());
         }
         System.out.println();
     }
@@ -74,8 +81,20 @@ public class Main {
 
         Products selectedProduct = findProductById(productId);
         if (selectedProduct != null) {
-            String result = cart.addProduct(new Products(selectedProduct.getName(), selectedProduct.getPrice(), quantity));
-            System.out.println(result);
+            cart.addProduct(new Products(selectedProduct.getId(), selectedProduct.getName(), selectedProduct.getPrice(), quantity));
+        } else {
+            System.out.println("Invalid product ID");
+        }
+        System.out.println();
+    }
+
+    private static void removeFromCart(Scanner scanner) {
+        System.out.print("Enter the product ID: ");
+        String productId = scanner.next();
+
+        Products selectedProduct = findProductById(productId);
+        if (selectedProduct != null) {
+            cart.removeProduct(selectedProduct);
         } else {
             System.out.println("Invalid product ID");
         }
@@ -83,8 +102,9 @@ public class Main {
     }
 
 
+
     private static Products findProductById(String productId) {
-        Set<Products> products = Products.getAllProducts();
+        List<Products> products = Products.getAllProducts();
         for (Products product : products) {
             if (product.getId().equals(Integer.parseInt(productId))) {
                 return product;
