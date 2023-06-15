@@ -26,7 +26,7 @@ public class ShoppingCart {
     }
 
     public void showProducts(){
-        System.out.println("Total of products in cart: " + this.products.size());
+        System.out.println("\n Total of products in cart: " + this.products.size());
         System.out.print("Products: ");
         for (Products p : products) {
             System.out.print(p.getName() + ", ");
