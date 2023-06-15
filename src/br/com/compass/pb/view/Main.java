@@ -1,24 +1,25 @@
 package br.com.compass.pb.view;
 
+import br.com.compass.pb.controller.Checkout;
 import br.com.compass.pb.controller.Products;
 import br.com.compass.pb.controller.ShoppingCart;
 import br.com.compass.pb.controller.Stock;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
 
     public static ShoppingCart cart;
+    public static Checkout checkout;
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        int choice;
-
         cart = new ShoppingCart();
+        checkout = new Checkout(cart, new Stock());
+
+        int choice;
 
         do {
             displayMenu();
@@ -38,6 +39,8 @@ public class Main {
                     cart.showProducts();
                     break;
                 case 5:
+                    checkout.totalPrice();
+                    proceedCheckout(scanner);
                     break;
                 case 6:
                     System.out.println("Exiting the program...");
@@ -52,7 +55,7 @@ public class Main {
     }
 
     private static void displayMenu() {
-        System.out.println("Menu:");
+        System.out.println("\nMenu:");
         System.out.println("1. Display all products");
         System.out.println("2. Add a product to the cart");
         System.out.println("3. Remove a product from the cart");
@@ -64,7 +67,7 @@ public class Main {
 
     private static void displayAllProducts() {
         List<Products> products = Products.getAllProducts();
-        System.out.println("Available products:");
+        System.out.println("\n Available products:");
         for (Products product : products) {
             System.out.println("ID: "+ product.getId() + " - Name: " + product.getName()
                     + " - $" + product.getPrice() + " - Stock: " + product.getQuantity());
@@ -101,8 +104,6 @@ public class Main {
         System.out.println();
     }
 
-
-
     private static Products findProductById(String productId) {
         List<Products> products = Products.getAllProducts();
         for (Products product : products) {
@@ -111,6 +112,17 @@ public class Main {
             }
         }
         return null;
+    }
+
+    private static void proceedCheckout(Scanner scanner){
+        System.out.print("Proceed checkout[Y or N]: ");
+        String choice = scanner.next();
+        if (choice.contains("Y") || choice.contains("y")){
+            checkout.finishCheckout();
+        }
+        else {
+            System.out.println("Cancelled purchase!");
+        }
     }
 
 }
