@@ -9,6 +9,9 @@ public class ShoppingCart {
 
     private List<Products> products = new ArrayList<>();
 
+    public List<Products> getProducts() {
+        return products;
+    }
     public void addProduct(Products product){
         if(product.getQuantity() > 0){
             this.products.add(product);
