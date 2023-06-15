@@ -49,4 +49,15 @@ public class Stock {
         }
     }
 
+    public void updateProductQuantity(int productId, int quantity){
+        try{
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE products SET quantity='" + quantity + "'WHERE id='" + productId + "'");
+            statement.close();
+            System.out.println("Product quantity updated successfully.");
+        } catch (SQLException e) {
+            System.out.println("Unable to update product quantity.");
+        }
+    }
+
 }
