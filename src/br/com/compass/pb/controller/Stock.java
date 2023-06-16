@@ -1,18 +1,12 @@
 package br.com.compass.pb.controller;
 
+import br.com.compass.pb.model.Connector;
+
 import java.sql.*;
 
 public class Stock {
 
-    private Connection connection;
-
-    public Stock() {
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce", "root", "1234");
-        } catch (SQLException e) {
-            System.out.println("Failed to connect to database");
-        }
-    }
+    private final Connection connection = Connector.getConnection();
 
     public void addProduct(Products prod) {
         try {
@@ -52,7 +46,7 @@ public class Stock {
     public void updateProductQuantity(int productId, int quantity){
         try{
             Statement statement = connection.createStatement();
-            statement.executeUpdate("UPDATE products SET quantity='" + quantity + "'WHERE id='" + productId + "'");
+            statement.executeUpdate("UPDATE products SET quantity = (quantity - " + quantity + ") WHERE id = '" + productId + "'");
             statement.close();
             System.out.println("Product quantity updated successfully.");
         } catch (SQLException e) {
