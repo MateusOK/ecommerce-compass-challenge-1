@@ -22,34 +22,20 @@ public class Products {
         return id;
     }
 
-
     void setId(Integer id) {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public Integer getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public static List<Products> getAllProducts() {
@@ -67,7 +53,6 @@ public class Products {
                 Integer quantity = resultSet.getInt("quantity");
 
                 Products product = new Products(id, name, price, quantity);
-                product.setId(id); // Set the ID obtained from the database
                 products.add(product);
             }
 
