@@ -13,7 +13,7 @@ public class ShoppingCart {
         return products;
     }
     public void addProduct(Products product){
-        if(product.getQuantity() > 0){
+        if(product.getQuantity() > product.getProductQuantity(product)){
             this.products.add(product);
             System.out.println("Product added to cart");
         }
