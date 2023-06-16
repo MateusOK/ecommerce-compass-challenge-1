@@ -16,6 +16,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        new ProductsInsertion().insertProducts();
+
         Scanner scanner = new Scanner(System.in);
         cart = new ShoppingCart();
         checkout = new Checkout(cart, new Stock());
