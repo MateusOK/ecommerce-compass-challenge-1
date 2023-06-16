@@ -4,6 +4,7 @@ import br.com.compass.pb.controller.Checkout;
 import br.com.compass.pb.controller.Products;
 import br.com.compass.pb.controller.ShoppingCart;
 import br.com.compass.pb.controller.Stock;
+import br.com.compass.pb.model.ProductsInsertion;
 
 import java.util.List;
 import java.util.Scanner;
@@ -26,28 +27,16 @@ public class Main {
             choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
-                    displayAllProducts();
-                    break;
-                case 2:
-                    addToCart(scanner);
-                    break;
-                case 3:
-                    removeFromCart(scanner);
-                    break;
-                case 4:
-                    cart.showProducts();
-                    break;
-                case 5:
+                case 1 -> displayAllProducts();
+                case 2 -> addToCart(scanner);
+                case 3 -> removeFromCart(scanner);
+                case 4 -> cart.showProducts();
+                case 5 -> {
                     checkout.totalPrice();
                     proceedCheckout(scanner);
-                    break;
-                case 6:
-                    System.out.println("Exiting the program...");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                }
+                case 6 -> System.out.println("Exiting the program...");
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         } while (choice != 6);
 
