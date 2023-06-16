@@ -11,6 +11,8 @@ public class Products {
     private double price;
     private Integer quantity;
 
+    private static final Connection connection = Connector.getConnection();
+
     public Products(Integer id, String name, Double price, Integer quantity) {
         this.id = id;
         this.name = name;
@@ -40,8 +42,6 @@ public class Products {
 
     public static List<Products> getAllProducts() {
         List<Products> products = new ArrayList<>();
-        Connection connection = Connector.getConnection();
-
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM products");
@@ -63,6 +63,22 @@ public class Products {
         }
 
         return products;
+    }
+
+    public Integer getProductQuantity(Products product){
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT quantity FROM products WHERE id ='" + product.getId() + "'");
+
+            while(resultSet.next()){
+                Integer quantity = resultSet.getInt("quantity");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error trying to get quantity from database");;
+        }
+
+        return quantity;
     }
 
     @Override
