@@ -22,7 +22,7 @@ public class Connector {
     public void createTable(){
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("create table products(" + "id int auto_increment," +
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS products(" + "id int auto_increment," +
                     "product_name varchar(100)," + "price double," + "quantity int," + "primary key(id)" + ")");
             statement.close();
         } catch (SQLException e) {
@@ -33,8 +33,8 @@ public class Connector {
     public void createDatabase(){
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("create database ecommerce");
-            statement.executeUpdate("use ecommerce");
+            statement.executeUpdate("CREATE DATABASE IF NOT EXISTS ecommerce");
+            statement.executeUpdate("USE ecommerce");
             statement.close();
         } catch (SQLException e) {
             System.out.println("An error occurred while trying to create the database");
