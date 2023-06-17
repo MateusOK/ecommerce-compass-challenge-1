@@ -20,6 +20,7 @@ public class Checkout {
     }
 
     public void finishCheckout(){
+        System.out.println("Purchase complete, thank you!");
         for(Products product : cart.getProducts()){
             stock.updateProductQuantity(product.getId(), product.getQuantity());
         }
