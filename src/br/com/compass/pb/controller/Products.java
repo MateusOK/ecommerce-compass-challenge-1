@@ -65,13 +65,15 @@ public class Products {
         return products;
     }
 
-    public Integer getProductQuantity(Products product){
+    public Integer getProductQuantity(Integer id){
+        Integer quantity = null;
+
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT quantity FROM products WHERE id ='" + product.getId() + "'");
+            ResultSet resultSet = statement.executeQuery("SELECT quantity FROM products WHERE id ='" + id + "'");
 
             while(resultSet.next()){
-                Integer quantity = resultSet.getInt("quantity");
+                quantity = resultSet.getInt("quantity");
             }
 
         } catch (SQLException e) {
