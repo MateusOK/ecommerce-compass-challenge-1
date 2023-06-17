@@ -17,7 +17,7 @@ public class ShoppingCart {
             this.products.add(product);
             System.out.println("Product added to cart");
         }
-        else{System.out.println("Product not available, out of stock");}
+        else{System.out.println("Product quantity not available, out of stock");}
     }
 
     public void removeProduct(Products product){
