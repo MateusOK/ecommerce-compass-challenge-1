@@ -13,7 +13,7 @@ public class ShoppingCart {
         return products;
     }
     public void addProduct(Products product){
-        if(product.getQuantity() > product.getProductQuantity(product)){
+        if(product.getQuantity() < product.getProductQuantity(product.getId())){
             this.products.add(product);
             System.out.println("Product added to cart");
         }
@@ -29,11 +29,13 @@ public class ShoppingCart {
     }
 
     public void showProducts(){
-        System.out.println("\n Total of products in cart: " + this.products.size());
+        Integer totalProducts = 0;
         System.out.print("Products: ");
         for (Products p : products) {
             System.out.print(p.getName() + ", ");
+            totalProducts += p.getQuantity();
         }
+        System.out.println("\n Total of products in cart: " + totalProducts);
     }
 
 }
