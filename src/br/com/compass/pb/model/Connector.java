@@ -8,10 +8,14 @@ import java.sql.Statement;
 public class Connector {
     private static Connection connection;
 
+    private static final String PASSWORD = "";
+    private static final String USER = "";
+    private static final String URL = ""; //usually: "jdbc:mysql://localhost:3306/"
+
     public static Connection getConnection() {
         if (connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "1234");
+                connection = DriverManager.getConnection(URL, USER, PASSWORD );
             } catch (SQLException e) {
                 System.out.println("An error occurred while trying to connect to the database");
             }
