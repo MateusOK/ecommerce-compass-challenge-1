@@ -1,8 +1,6 @@
 package br.com.compass.pb.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 public class ShoppingCart {
@@ -13,7 +11,7 @@ public class ShoppingCart {
         return products;
     }
     public void addProduct(Products product){
-        if(product.getQuantity() < product.getProductQuantity(product.getId())){
+        if(product.getQuantity() <= product.getProductQuantity(product.getId())){
             this.products.add(product);
             System.out.println("Product added to cart");
         }
