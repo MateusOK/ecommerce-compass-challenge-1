@@ -3,6 +3,9 @@ package br.com.compass.pb.controller;
 import br.com.compass.pb.model.Connector;
 
 import java.sql.*;
+import java.util.List;
+
+import static br.com.compass.pb.controller.Products.getAllProducts;
 
 public class Stock {
 
@@ -53,5 +56,16 @@ public class Stock {
             System.out.println("Unable to update product quantity.");
         }
     }
+
+    public boolean isProductExists(Products product) {
+        List<Products> products = getAllProducts();
+        for (Products existingProduct : products) {
+            if (existingProduct.getId() == product.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

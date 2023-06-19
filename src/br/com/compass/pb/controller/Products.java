@@ -43,24 +43,26 @@ public class Products {
     public static List<Products> getAllProducts() {
         List<Products> products = new ArrayList<>();
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM products");
+            if (connection != null){
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM products");
 
-            while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
-                String name = resultSet.getString("product_name");
-                Double price = resultSet.getDouble("price");
-                Integer quantity = resultSet.getInt("quantity");
+                while (resultSet.next()) {
+                    Integer id = resultSet.getInt("id");
+                    String name = resultSet.getString("product_name");
+                    Double price = resultSet.getDouble("price");
+                    Integer quantity = resultSet.getInt("quantity");
 
-                Products product = new Products(id, name, price, quantity);
-                products.add(product);
+                    Products product = new Products(id, name, price, quantity);
+                    products.add(product);
+                }
+
+                resultSet.close();
+                statement.close();
+            } else {
+                System.out.println("\nUnable to display products!");
             }
-
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } catch (SQLException e) {}
 
         return products;
     }
